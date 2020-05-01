@@ -18,3 +18,16 @@ connection.connect(function (err) {
     runProgram();
 });
 
+function runProgram() {
+    inquirer
+        .prompt([
+            {
+                type: "list",
+                message: "What would you like to do?",
+                choices: ["Add a department", "Add a role", "Add an employee", "View departments", "View roles", "View employees", "Update employee role",],
+                name: "prompt"
+            },
+
+        ])
+
+        
