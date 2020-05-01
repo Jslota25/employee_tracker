@@ -126,3 +126,48 @@ function addRole() {
             )
         });
 }
+
+function addEmployee() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "What is the employee's first name?",
+                name: "firstName"
+            },
+            {
+                type: "input",
+                message: "What is the employee's last name?",
+                name: "lastName"
+            },
+
+            {
+                type: "number",
+                message: "What is the employee's role ID number?",
+                name: "roleId"
+            },
+            {
+                type: "number",
+                message: "What is the employee's manager ID number?",
+                name: "managerId"
+            },
+        ])
+        .then(function (res) {
+            console.log(res);
+            connection.query(
+                "INSERT INTO employee SET ?",
+                {
+                    first_name: res.firstName,
+                    last_name: res.lastName,
+                    role_id: res.roleId,
+                    manager_id: res.managerId
+                },
+                function (err) {
+                    if (err) throw err;
+                    console.log("Success!");
+                    runPogram();
+                }
+            )
+
+        });
+}
