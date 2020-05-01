@@ -193,3 +193,14 @@ function viewRoles() {
         }
     );
 }
+
+function viewEmployees() {
+    connection.query(
+        "SELECT * FROM employees",
+        function (err, res) {
+            if (err) throw err;
+            console.table(res);
+            runProgram();
+        }
+    );
+}
