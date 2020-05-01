@@ -155,7 +155,7 @@ function addEmployee() {
         .then(function (res) {
             console.log(res);
             connection.query(
-                "INSERT INTO employee SET ?",
+                "INSERT INTO employees SET ?",
                 {
                     first_name: res.firstName,
                     last_name: res.lastName,
@@ -170,4 +170,15 @@ function addEmployee() {
             )
 
         });
+}
+
+function viewDepartments() {
+    connection.query(
+        "SELECT * FROM departments",
+        function (err, res) {
+            if (err) throw err;
+            console.table(res);
+            runProgram();
+        }
+    );
 }
