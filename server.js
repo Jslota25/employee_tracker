@@ -33,34 +33,59 @@ function runProgram() {
         .then(function (res) {
             switch (res.prompt) {
                 case "Add a department":
-                    console.log("You are about to add department.")
+                    console.log("Which department would you like to add?");
                     addDepartment();
                     break;
                 case "Add a role":
-                    console.log("You are about to add a role.")
+                    console.log("Which role would you like to add?");
                     addRole();
                     break;
                 case "Add an employee":
-                    console.log("You are about to add an employee.")
+                    console.log("Which employee would you like to add?");
                     addEmployee();
                     break;
                 case "View departments":
-                    console.log("You are about to view all departments.")
+                    console.log("Here are all departments.");
                     viewDepartments();
                     break;
                 case "View roles":
-                    console.log("You are about to view all roles.")
-                    viewRoles()
+                    console.log("Here are all roles.");
+                    viewRoles();
                     break;
                 case "View employees":
-                    console.log("You are about to view all employees")
+                    console.log("Here are all employees");
                     viewEmployees();
                     break;
                 case "Update an employee role":
-                    console.log("You are about to update an employee role.")
+                    console.log("Which employee role would you like to update?");
                     updateEmployeeRole();
                     break;
             }
-            console.log(response.addViewUpdate);
+            console.log(res.prompt);
+        });
+}
+
+function addDepartment() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "Which department would you like to add?",
+                name: "department"
+            },
+        ])
+        .then(function (res) {
+            console.log(res.department);
+            connection.query(
+                "INSERT INTO departments SET ?",
+                {
+                    dept_name: res.department
+                },
+                function (err) {
+                    if (err) throw err;
+                    console.log("Success!");
+                    runProgram();
+                }
+            )
         });
 }
