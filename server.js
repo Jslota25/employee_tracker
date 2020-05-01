@@ -244,7 +244,6 @@ function updateRole() {
                         ],
                         function (err) {
                             if (err) throw err;
-                            query.push(query);
                             console.log("Success!");
                             runProgram();
                         }
