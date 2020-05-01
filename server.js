@@ -58,7 +58,7 @@ function runProgram() {
                     break;
                 case "Update an employee role":
                     console.log("Which employee role would you like to update?");
-                    updateEmployeeRole();
+                    updateRole();
                     break;
             }
             console.log(res.prompt);
@@ -203,4 +203,52 @@ function viewEmployees() {
             runProgram();
         }
     );
+}
+
+function updateRole() {
+    connection.query(
+        "SELECT * FROM employees",
+        function (err, res) {
+            if (err) throw err;
+            inquirer
+                .prompt([
+                    {
+                        type: "list",
+                        choices: function () {
+                            var choices = [];
+                            for (var i = 0; i < res.length; i++) {
+                                choices.push(res[i].first_name);
+                            }
+                            return choices;
+                        },
+                        message: "Please choose an employee.",
+                        name: "employee"
+                    },
+                    {
+                        type: "input",
+                        message: "What would you like their new role to be?",
+                        name: "newRole"
+                    }
+                ])
+                .then(function (res) {
+                    console.log("Role ID for " + res.employee + " is now " + res.newRole + "\n");
+                    var query = connection.query(
+                        "UPDATE employees SET ? WHERE ?",
+                        [
+                            {
+                                role_id: res.newRole
+                            },
+                            {
+                                first_name: res.employee
+                            },
+                        ],
+                        function (err) {
+                            if (err) throw err;
+                            query.push(query);
+                            console.log("Success!");
+                            runProgram();
+                        }
+                    );
+                })
+        });
 }
