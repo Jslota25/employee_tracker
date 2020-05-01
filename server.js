@@ -182,3 +182,14 @@ function viewDepartments() {
         }
     );
 }
+
+function viewRoles() {
+    connection.query(
+        "SELECT * FROM roles",
+        function (err, res) {
+            if (err) throw err;
+            console.table(res);
+            runProgram();
+        }
+    );
+}
