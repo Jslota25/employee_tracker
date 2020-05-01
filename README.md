@@ -4,7 +4,7 @@
 @Jslota25
 
 # Video demo
-
+![](employee.gif)
 
 # Installation
 Step 1. Git clone this link to your terminal: https://github.com/Jslota25/employee_tracker.git
